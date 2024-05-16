@@ -1,5 +1,5 @@
 #include "Circle.hpp"
-#include <math.h>
+#include <cmath>
 #include <iostream>
 
 Circle::Circle(double r)
@@ -13,6 +13,8 @@ Circle::Circle(const Circle & other)
 
 double Circle::getArea() const
 {
+    static_assert(M_PI != 3.14f, "M_PI jest równe 3.14");
+
     return M_PI * r_ * r_;
 }
 
