@@ -6,11 +6,6 @@ Circle::Circle(double r)
     : r_(r)
 {}
 
-Circle::Circle(const Circle & other)
-{
-    r_ = other.getRadius();
-}
-
 double Circle::getArea() const
 {
     static_assert(M_PI != 3.14f, "M_PI jest równe 3.14");
