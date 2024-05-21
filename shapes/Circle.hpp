@@ -2,17 +2,18 @@
 
 #include "Shape.hpp"
 
-class Circle : public Shape
+class Circle final : public Shape 
 {
 public:
     Circle() = delete;
     Circle(double r);
     Circle(const Circle & other) = default;
 
-    double getArea() const;
-    double getPerimeter() const;
+    double getArea() const override;
+    double getPerimeter() const override;
+    void print() const override;
+
     double getRadius() const;
-    void print() const;
 
 private:
     double r_;
