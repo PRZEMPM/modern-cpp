@@ -9,11 +9,12 @@ public:
     Rectangle(double x, double y);
     Rectangle(const Rectangle & other) = default;
 
-    double getArea() const;
-    double getPerimeter() const;
-    double getX() const;
+    virtual double getArea() const override;
+    virtual double getPerimeter() const override;
+    virtual void print() const override;
+
+    virtual double getX() const final;
     double getY() const;
-    void print() const;
 
 private:
     double x_;
