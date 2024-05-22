@@ -8,6 +8,9 @@
 #include "Square.hpp"
 #include "Circle.hpp"
 
+#include <chrono>     // Used to calculate execution time fibonacci
+#include <iomanip>    // Used to calculate execution time fibonacci
+
 using namespace std;
 
 using Collection = vector<shared_ptr<Shape>>;
@@ -65,6 +68,11 @@ void findFirstShapeMatchingPredicate(const Collection& collection,
     }
 }
 
+constexpr unsigned int fibonacci(unsigned int n)
+{
+    return (n <= 1) ? n : (fibonacci(n-1)+fibonacci(n-2));
+}
+
 int main()
 {   
     Collection shapes = 
@@ -95,5 +103,13 @@ int main()
     findFirstShapeMatchingPredicate(shapes, perimeterBiggerThan20, "perimeter bigger than 20");
     findFirstShapeMatchingPredicate(shapes, areaLessThan10, "area less than 10");
 
+    // Used to calculate execution time fibonacci
+    auto start = std::chrono::system_clock::now();
+    fibonacci(45);
+    auto stop = std::chrono::system_clock::now();
+    std::chrono::duration<double> diff = stop - start;
+    std::cout << "Fibonacci execution time: " << std::fixed << std::setprecision(6) << diff.count() << " seconds\n";
+    // end code execution time fibonacci
+    
     return 0;
 }
