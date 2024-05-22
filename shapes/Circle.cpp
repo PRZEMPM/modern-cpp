@@ -1,10 +1,21 @@
 #include "Circle.hpp"
 #include <cmath>
+#include <numbers>
 #include <iostream>
 
 Circle::Circle(double r)
     : r_(r)
 {}
+
+Circle::Circle(const Circle & other) : Shape(other)
+{
+    r_ = other.getRadius();
+}
+
+double Circle::getPi() const
+{
+    return M_PI;
+}
 
 double Circle::getArea() const
 {
@@ -27,5 +38,6 @@ void Circle::print() const
 {
     std::cout << "Circle: radius: " << getRadius() << std::endl
               << "          area: " << getArea() << std::endl
-              << "     perimeter: " << getPerimeter() << std::endl;
+              << "     perimeter: " << getPerimeter() << std::endl
+              << "         color: " << color_ << std::endl;
 }
