@@ -9,8 +9,8 @@ public:
     Rectangle(double x, double y);
     Rectangle(const Rectangle & other);
 
-    virtual double getArea() const override;
-    virtual double getPerimeter() const override;
+    virtual double getArea() const noexcept override;
+    virtual double getPerimeter() const noexcept override;
     virtual void print() const override;
 
     virtual double getX() const final;
