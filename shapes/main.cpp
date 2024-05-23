@@ -13,30 +13,32 @@
 
 #include <map>        // Used to structured bindings
 
+#include <functional> // std::function
+
 using namespace std;
 
 using Collection = vector<shared_ptr<Shape>>;
 
-auto sortByArea(shared_ptr<Shape> first, shared_ptr<Shape> second)
-{
+auto sortByArea = [] (shared_ptr<Shape> first, shared_ptr<Shape> second) 
+{    
     if(first == nullptr || second == nullptr)
         return false;
     return (first->getArea() < second->getArea());
-}
+};
 
-auto perimeterBiggerThan20(shared_ptr<Shape> s)
+auto perimeterBiggerThanX = [x = 20] (shared_ptr<Shape> s)
 {
     if(s != nullptr)
-        return (s->getPerimeter() > 20);
+        return (s->getPerimeter() > x);
     return false;
-}
+};
 
-auto areaLessThan10(shared_ptr<Shape> s)
+auto areaLessThanX = [x = 10](shared_ptr<Shape> s)
 {
     if(s != nullptr)
-        return (s->getArea() < 10);
+        return (s->getArea() < x);
     return false;
-}
+};
 
 void printCollectionElements(const Collection& collection)
 {
@@ -55,7 +57,7 @@ void printAreas(const Collection& collection)
 }
 
 void findFirstShapeMatchingPredicate(const Collection& collection,
-                                     bool (*predicate)(shared_ptr<Shape> s),
+                                     std::function<bool(shared_ptr<Shape>)>predicate,
                                      std::string info)
 {
     auto iter = std::find_if(collection.begin(), collection.end(), predicate);
@@ -104,8 +106,8 @@ int main()
     auto square = make_shared<Square>(4.0);
     shapes.push_back(square);
     
-    findFirstShapeMatchingPredicate(shapes, perimeterBiggerThan20, "perimeter bigger than 20");
-    findFirstShapeMatchingPredicate(shapes, areaLessThan10, "area less than 10");
+    findFirstShapeMatchingPredicate(shapes, perimeterBiggerThanX, "perimeter bigger than 20");
+    findFirstShapeMatchingPredicate(shapes, areaLessThanX, "area less than 10");
 
     // Used to calculate execution time fibonacci
     auto start = std::chrono::system_clock::now();
