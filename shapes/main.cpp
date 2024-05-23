@@ -11,6 +11,8 @@
 #include <chrono>     // Used to calculate execution time fibonacci
 #include <iomanip>    // Used to calculate execution time fibonacci
 
+#include <map>        // Used to structured bindings
+
 using namespace std;
 
 using Collection = vector<shared_ptr<Shape>>;
@@ -75,6 +77,8 @@ constexpr unsigned int fibonacci(unsigned int n)
 
 int main()
 {   
+    std::cout << "alignof Circle: " << alignof(Circle) << std::endl;
+    
     Collection shapes = 
     {
         make_shared<Circle>(2.0),
@@ -85,7 +89,7 @@ int main()
         make_shared<Square>(3.0),
         make_shared<Circle>(4.0),
     };
-
+    
     shapes.push_back(make_shared<Circle>(Color::GREEN));
     printCollectionElements(shapes);
 
@@ -110,6 +114,18 @@ int main()
     std::chrono::duration<double> diff = stop - start;
     std::cout << "Fibonacci execution time: " << std::fixed << std::setprecision(6) << diff.count() << " seconds\n";
     // end code execution time fibonacci
+
+    // Used to structured bindings
+    std::map<shared_ptr<Shape>, double> map
+    {
+        {make_shared<Circle>(2.0), 2.0},
+        {make_shared<Circle>(Color::RED), 3.3}
+    };
+    for (const auto& [key, value] : map)
+    {
+        key->print();
+    }
+    // end code structured bindings
     
     return 0;
 }
