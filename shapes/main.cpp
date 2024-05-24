@@ -10,14 +10,12 @@
 
 #include <chrono>     // Used to calculate execution time fibonacci
 #include <iomanip>    // Used to calculate execution time fibonacci
-
 #include <map>        // Used to structured bindings
-
 #include <functional> // std::function
 
-using namespace std;
+#include "addShape.hpp"
 
-using Collection = vector<shared_ptr<Shape>>;
+using namespace std;
 
 auto sortByArea = [] (shared_ptr<Shape> first, shared_ptr<Shape> second) 
 {    
@@ -93,6 +91,12 @@ int main()
     };
     
     shapes.push_back(make_shared<Circle>(Color::GREEN));
+
+    // Used to 9. SFINAE (poziom ekspercki)
+    addShape(shapes, make_shared<Rectangle>(8.56, 2.2));
+    addShape(shapes, make_shared<Square>(4.23));
+    // end code SFINAE
+    
     printCollectionElements(shapes);
 
     cout << "Areas before sort: " << std::endl;
