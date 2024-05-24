@@ -3,8 +3,7 @@
 #include <numbers>
 #include <iostream>
 
-Circle::Circle(double r)
-    : r_(r)
+Circle::Circle(double r) : Shape(), r_(r) 
 {}
 
 Circle::Circle(const Circle & other) : Shape(other)
