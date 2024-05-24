@@ -18,12 +18,8 @@ protected:
 
 public:
     Shape(Color c) : color_(c) {}
-    Shape() {}
-
-    Shape(const Shape& ref)
-    {
-        color_ = ref.color_;
-    }
+    Shape() : Shape(Color::BLUE) {}
+    Shape(const Shape & other) : color_(other.color_) {}
 
     virtual ~Shape() {}
 
